@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G Brand Apps | Developer Portal</title>
+    <title>G Brand Apps</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -49,6 +49,7 @@
             color: var(--gray);
             font-size: 1.1rem;
             margin-bottom: 40px;
+            min-height: 1.5em; /* Prevenir salto visual */
         }
 
         .app-card {
@@ -107,32 +108,34 @@
 <body>
     <div class="container">
         <div class="logo">G Brand Apps</div>
-        <p class="tagline" id="tagline">Developer portal for high-quality mobile experiences.</p>
+        <p class="tagline" id="tagline">...</p>
         
         <div class="apps-list">
             <a href="https://gbrandramos-cmyk.github.io/volado-maestro-app-web/" class="app-card">
                 <div class="app-info">
-                    <span class="app-name" id="app-name">Volado Maestro</span>
-                    <span class="app-desc" id="app-desc">La app definitiva para tomar decisiones.</span>
+                    <span class="app-name" id="app-name">...</span>
+                    <span class="app-desc" id="app-desc">...</span>
                 </div>
                 <div class="btn-arrow">→</div>
             </a>
         </div>
 
         <footer id="footer">
-            &copy; 2026 G brand Apps. All rights reserved.
+            &copy; 2026 G brand Apps.
         </footer>
     </div>
 
     <script>
         const translations = {
             es: {
+                title: "G Brand Apps | Portal de Desarrollador",
                 tagline: "Portal de desarrollador para experiencias móviles de alta calidad.",
                 appName: "Volado Maestro",
                 appDesc: "La app definitiva para tomar decisiones.",
                 footer: "&copy; 2026 G brand Apps. Todos los derechos reservados."
             },
             en: {
+                title: "G Brand Apps | Developer Portal",
                 tagline: "Developer portal for high-quality mobile experiences.",
                 appName: "Flip Coin Master",
                 appDesc: "The ultimate app for making decisions.",
@@ -145,13 +148,14 @@
             const lang = browserLang.startsWith('es') ? 'es' : 'en';
             const t = translations[lang];
             
+            document.title = t.title;
             document.getElementById('tagline').innerText = t.tagline;
             document.getElementById('app-name').innerText = t.appName;
             document.getElementById('app-desc').innerText = t.appDesc;
             document.getElementById('footer').innerHTML = t.footer;
         }
 
-        window.onload = initLanguage;
+        initLanguage(); // Ejecutar inmediatamente
     </script>
 </body>
 </html>
