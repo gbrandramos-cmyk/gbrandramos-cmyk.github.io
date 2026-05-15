@@ -394,7 +394,7 @@
             for(let i = 1; i <= TOTAL_SLIDES; i++) {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                slide.innerHTML = \`<img src="assets/images/\${currentOS}/\${i}.png" alt="\${currentOS} \${i}">\`;
+                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} ${i}">`;
                 track.appendChild(slide);
             }
         }
@@ -420,7 +420,7 @@
 
         function goToSlide(index) {
             currentIndex = index;
-            track.style.transform = \`translateX(-\${currentIndex * 100}%)\`;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
             const dots = document.querySelectorAll('.dot');
             dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
         }
