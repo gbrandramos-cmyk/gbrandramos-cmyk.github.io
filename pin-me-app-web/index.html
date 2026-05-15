@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Me | Save Locations</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a; /* Azul marino */
+            --text-primary: #1772ff; /* Azul de Pin Me */
+            --text-gray: #888888;
+            --text-light: #e0e0e0;
+            --accent-primary: #1772ff;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: #fff;
+        }
+
+        .lang-switch {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--text-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .app-downloads {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-shrink: 0;
+            flex-direction: column;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(23, 114, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .store-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0.5; /* Desactivado visualmente */
+            pointer-events: none; /* Desactivado funcionalmente */
+        }
+
+        .coming-soon-badge {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: -5px;
+        }
+
+        .store-badge {
+            height: 35px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-description {
+            flex-grow: 1;
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .app-description p {
+            margin-bottom: 15px;
+        }
+
+        /* CAROUSEL TABS */
+        .os-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .os-tab {
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .os-tab.active {
+            color: var(--text-primary);
+        }
+
+        /* CAROUSEL CONTAINER */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        @media (max-width: 768px) {
+             .carousel-wrapper {
+                 aspect-ratio: 4 / 3;
+             }
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* DOTS */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--text-primary);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Pin Me Logo" id="main-logo">
+            </div>
+            <div class="header-nav">
+                <a href="index.html" id="nav-home">Inicio</a>
+                <a href="privacy.html" id="nav-privacy">Privacidad</a>
+                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <main>
+            <section class="hero-section">
+                <div class="app-downloads">
+                    <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
+                    <span class="coming-soon-badge" id="coming-soon">Próximamente</span>
+                    <div class="store-badges">
+                        <a href="#" target="_blank">
+                            <img src="assets/images/badge-google.png" alt="Google Play" class="store-badge" onerror="this.style.display='none'">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-description" id="app-desc">
+                    <!-- Textos dinámicos aquí -->
+                </div>
+            </section>
+
+            <!-- TABS & CAROUSEL -->
+            <section class="gallery-section">
+                <div class="os-tabs">
+                    <button class="os-tab active" onclick="switchOS('ios')">iOS</button>
+                    <button class="os-tab" onclick="switchOS('android')">Android</button>
+                </div>
+
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack"></div>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots"></div>
+            </section>
+        </main>
+
+        <footer id="footer-text">
+            © 2026 G BRAND APPS • PIN ME
+        </footer>
+    </div>
+
+    <script>
+        const translations = {
+            es: {
+                title: "Pin Me | Guarda Ubicaciones",
+                navHome: "Inicio",
+                navPrivacy: "Privacidad",
+                langBtn: "EN",
+                comingSoon: "Próximamente",
+                desc: `
+                    <p>Pin Me es la aplicación definitiva para guardar y organizar tus ubicaciones favoritas. Ya sea que estés explorando una nueva ciudad, recordando el lugar donde aparcaste o guardando los mejores restaurantes que has visitado, Pin Me te ayuda a mantener un registro visual y preciso.</p>
+                    <p>Disfruta de una navegación fluida con mapas 3D interactivos y un hermoso Modo Oscuro. Suelta un pin en el mapa con un solo toque, dale un nombre, adjunta fotos para recordar cada detalle, y visualiza la distancia en tiempo real hacia tus destinos guardados. ¡Tu mundo, marcado a tu manera!</p>
+                `,
+                footer: "© 2026 G BRAND APPS • PIN ME"
+            },
+            en: {
+                title: "Pin Me | Save Locations",
+                navHome: "Home",
+                navPrivacy: "Privacy",
+                langBtn: "ES",
+                comingSoon: "Coming Soon",
+                desc: `
+                    <p>Pin Me is the ultimate app for saving and organizing your favorite locations. Whether you are exploring a new city, remembering where you parked, or keeping track of the best restaurants you've visited, Pin Me helps you keep a precise visual record.</p>
+                    <p>Enjoy a smooth navigation experience with interactive 3D maps and a beautiful Dark Mode. Drop a pin on the map with a single tap, give it a custom name, attach photos to remember every detail, and view real-time distances to your saved destinations. Your world, pinned your way!</p>
+                `,
+                footer: "© 2026 G BRAND APPS • PIN ME"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function initLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            currentLang = browserLang.startsWith('es') ? 'es' : 'en';
+            applyLanguage();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const t = translations[currentLang];
+            document.title = t.title;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
+            document.getElementById('lang-btn').innerText = t.langBtn;
+            document.getElementById('coming-soon').innerText = t.comingSoon;
+            document.getElementById('app-desc').innerHTML = t.desc;
+            document.getElementById('footer-text').innerText = t.footer;
+            
+            // Re-inicializar slider para asegurar consistencia
+            initSlider();
+        }
+
+        // Configuración de Imágenes
+        const TOTAL_SLIDES = 6;
+        let currentOS = 'ios';
+        let currentIndex = 0;
+        let autoPlayInterval;
+
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+        
+        function initSlider() {
+            renderSlides();
+            renderDots();
+            goToSlide(0);
+            startAutoPlay();
+        }
+
+        function renderSlides() {
+            track.innerHTML = '';
+            for(let i = 1; i <= TOTAL_SLIDES; i++) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = \`<img src="assets/images/\${currentOS}/\${i}.png" alt="\${currentOS} \${i}">\`;
+                track.appendChild(slide);
+            }
+        }
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            for(let i = 0; i < TOTAL_SLIDES; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.onclick = () => { goToSlide(i); startAutoPlay(); };
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function switchOS(os) {
+            if (currentOS === os) return;
+            currentOS = os;
+            document.querySelectorAll('.os-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.innerText.toLowerCase() === os);
+            });
+            initSlider();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = \`translateX(-\${currentIndex * 100}%)\`;
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        }
+
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                goToSlide((currentIndex + 1) % TOTAL_SLIDES);
+            }, 3000);
+        }
+
+        window.onload = () => {
+            initLanguage();
+        };
+    </script>
+</body>
+</html>

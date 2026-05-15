@@ -110,11 +110,18 @@
         <div class="logo">G Brand Apps</div>
         <p class="tagline" id="tagline">...</p>
         
-        <div class="apps-list">
+        <div class="apps-list" style="display: flex; flex-direction: column; gap: 15px;">
+            <a href="https://gbrandramos-cmyk.github.io/pin-me-app-web/" class="app-card">
+                <div class="app-info">
+                    <span class="app-name" id="app2-name">...</span>
+                    <span class="app-desc" id="app2-desc">...</span>
+                </div>
+                <div class="btn-arrow">→</div>
+            </a>
             <a href="https://gbrandramos-cmyk.github.io/volado-maestro-app-web/" class="app-card">
                 <div class="app-info">
-                    <span class="app-name" id="app-name">...</span>
-                    <span class="app-desc" id="app-desc">...</span>
+                    <span class="app-name" id="app1-name">...</span>
+                    <span class="app-desc" id="app1-desc">...</span>
                 </div>
                 <div class="btn-arrow">→</div>
             </a>
@@ -130,15 +137,19 @@
             es: {
                 title: "G Brand Apps | Portal de Desarrollador",
                 tagline: "Portal de desarrollador para experiencias móviles de alta calidad.",
-                appName: "Volado Maestro",
-                appDesc: "La app definitiva para tomar decisiones.",
+                app1Name: "Volado Maestro",
+                app1Desc: "La app definitiva para tomar decisiones.",
+                app2Name: "Pin Me",
+                app2Desc: "Guarda y explora tus lugares favoritos en mapas 3D.",
                 footer: "&copy; 2026 G brand Apps. Todos los derechos reservados."
             },
             en: {
                 title: "G Brand Apps | Developer Portal",
                 tagline: "Developer portal for high-quality mobile experiences.",
-                appName: "Flip Coin Master",
-                appDesc: "The ultimate app for making decisions.",
+                app1Name: "Flip Coin Master",
+                app1Desc: "The ultimate app for making decisions.",
+                app2Name: "Pin Me",
+                app2Desc: "Save and explore your favorite spots on 3D maps.",
                 footer: "&copy; 2026 G brand Apps. All rights reserved."
             }
         };
@@ -150,8 +161,10 @@
             
             document.title = t.title;
             document.getElementById('tagline').innerText = t.tagline;
-            document.getElementById('app-name').innerText = t.appName;
-            document.getElementById('app-desc').innerText = t.appDesc;
+            document.getElementById('app1-name').innerText = t.app1Name;
+            document.getElementById('app1-desc').innerText = t.app1Desc;
+            document.getElementById('app2-name').innerText = t.app2Name;
+            document.getElementById('app2-desc').innerText = t.app2Desc;
             document.getElementById('footer').innerHTML = t.footer;
         }
 
