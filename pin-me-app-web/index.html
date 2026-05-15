@@ -322,7 +322,7 @@
                         <li><strong>Centrado Inteligente:</strong> Orientación automática con brújula para que nunca pierdas el rumbo.</li>
                     </ul>
                 `,
-                footer: "© 2026 G BRAND APPS • PIN ME"
+                footer: `<a href="https://gbrandramos-cmyk.github.io/" style="color: inherit; text-decoration: none;">© 2026 G BRAND APPS • PIN ME</a>`
             },
             en: {
                 title: "Pin Me | Save Locations",
@@ -342,7 +342,7 @@
                         <li><strong>Smart Centering:</strong> Automatic compass orientation so you never lose your way.</li>
                     </ul>
                 `,
-                footer: "© 2026 G BRAND APPS • PIN ME"
+                footer: `<a href="https://gbrandramos-cmyk.github.io/" style="color: inherit; text-decoration: none;">© 2026 G BRAND APPS • PIN ME</a>`
             }
         };
 
@@ -367,7 +367,7 @@
             document.getElementById('lang-btn').innerText = t.langBtn;
             document.getElementById('coming-soon').innerText = t.comingSoon;
             document.getElementById('app-desc').innerHTML = t.desc;
-            document.getElementById('footer-text').innerText = t.footer;
+            document.getElementById('footer-text').innerHTML = t.footer;
             
             // Re-inicializar slider para asegurar consistencia
             initSlider();
