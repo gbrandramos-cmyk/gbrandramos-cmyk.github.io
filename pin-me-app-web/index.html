@@ -210,7 +210,7 @@
         .carousel-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         /* DOTS */
@@ -376,7 +376,6 @@
         }
 
         // Configuración de Imágenes
-        const TOTAL_SLIDES = 6;
         let currentOS = 'ios';
         let currentIndex = 0;
         let autoPlayInterval;
@@ -384,6 +383,10 @@
         const track = document.getElementById('carouselTrack');
         const dotsContainer = document.getElementById('carouselDots');
         
+        function getSlideCount() {
+            return currentOS === 'ios' ? 7 : 6;
+        }
+
         function initSlider() {
             renderSlides();
             renderDots();
@@ -393,7 +396,8 @@
 
         function renderSlides() {
             track.innerHTML = '';
-            for(let i = 1; i <= TOTAL_SLIDES; i++) {
+            const total = getSlideCount();
+            for(let i = 1; i <= total; i++) {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} ${i}">`;
@@ -403,7 +407,8 @@
 
         function renderDots() {
             dotsContainer.innerHTML = '';
-            for(let i = 0; i < TOTAL_SLIDES; i++) {
+            const total = getSlideCount();
+            for(let i = 0; i < total; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'dot';
                 dot.onclick = () => { goToSlide(i); startAutoPlay(); };
@@ -429,8 +434,9 @@
 
         function startAutoPlay() {
             clearInterval(autoPlayInterval);
+            const total = getSlideCount();
             autoPlayInterval = setInterval(() => {
-                goToSlide((currentIndex + 1) % TOTAL_SLIDES);
+                goToSlide((currentIndex + 1) % total);
             }, 3000);
         }
 
