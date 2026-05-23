@@ -117,19 +117,17 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            opacity: 0.5; /* Desactivado visualmente */
-            pointer-events: none; /* Desactivado funcionalmente */
         }
 
-        .coming-soon-badge {
-            background-color: var(--text-primary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: -5px;
+        .store-badge.disabled {
+            opacity: 0.4;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .store-badge.disabled:hover {
+            opacity: 0.6;
+            transform: scale(1.02);
+            cursor: pointer;
         }
 
         .store-badge {
@@ -266,12 +264,11 @@
             <section class="hero-section">
                 <div class="app-downloads">
                     <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
-                    <span class="coming-soon-badge" id="coming-soon">Próximamente</span>
                     <div class="store-badges">
-                        <a href="#" target="_blank">
-                            <img src="assets/images/badge-google.png" alt="Google Play" class="store-badge" onerror="this.style.display='none'">
+                        <a href="#" onclick="handleAndroidClick(event)">
+                            <img src="assets/images/badge-google.png" alt="Google Play" class="store-badge disabled" onerror="this.style.display='none'">
                         </a>
-                        <a href="#" target="_blank">
+                        <a href="https://apps.apple.com/app/id6768455152" target="_blank">
                             <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
                         </a>
                     </div>
@@ -367,12 +364,19 @@
             document.getElementById('nav-home').innerText = t.navHome;
             document.getElementById('nav-privacy').innerText = t.navPrivacy;
             document.getElementById('lang-btn').innerText = t.langBtn;
-            document.getElementById('coming-soon').innerText = t.comingSoon;
             document.getElementById('app-desc').innerHTML = t.desc;
             document.getElementById('footer-text').innerHTML = t.footer;
             
             // Re-inicializar slider para asegurar consistencia
             initSlider();
+        }
+
+        function handleAndroidClick(e) {
+            e.preventDefault();
+            const msg = currentLang === 'es' 
+                ? "Próximamente disponible en Google Play Store para Android." 
+                : "Coming soon to the Google Play Store for Android.";
+            alert(msg);
         }
 
         // Configuración de Imágenes
