@@ -254,6 +254,7 @@
             </div>
             <div class="header-nav">
                 <a href="index.html" id="nav-home">Inicio</a>
+                <a href="privacy.html" id="nav-privacy">Privacidad</a>
                 <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
             </div>
         </header>
@@ -303,6 +304,7 @@
             es: {
                 title: "Pin Me | Guarda Ubicaciones",
                 navHome: "Inicio",
+                navPrivacy: "Privacidad",
                 langBtn: "EN",
                 comingSoon: "Próximamente",
                 desc: `
@@ -323,6 +325,7 @@
             en: {
                 title: "Pin Me | Save Locations",
                 navHome: "Home",
+                navPrivacy: "Privacy",
                 langBtn: "ES",
                 comingSoon: "Coming Soon",
                 desc: `
@@ -359,6 +362,7 @@
             const t = translations[currentLang];
             document.title = t.title;
             document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
             document.getElementById('lang-btn').innerText = t.langBtn;
             document.getElementById('app-desc').innerHTML = t.desc;
             document.getElementById('footer-text').innerHTML = t.footer;
