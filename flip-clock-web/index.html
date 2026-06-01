@@ -265,8 +265,8 @@
                 <div class="app-downloads">
                     <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
                     <div class="store-badges">
-                        <a href="https://apps.apple.com/app/id6775342639" target="_blank">
-                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
+                        <a href="#" onclick="handleIOSClick(event)">
+                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge disabled" onerror="this.style.display='none'">
                         </a>
                     </div>
                 </div>
@@ -361,6 +361,14 @@
             
             // Re-inicializar slider para asegurar consistencia
             initSlider();
+        }
+
+        function handleIOSClick(e) {
+            e.preventDefault();
+            const msg = currentLang === 'es' 
+                ? "Próximamente disponible en Apple App Store para iOS." 
+                : "Coming soon to the Apple App Store for iOS.";
+            alert(msg);
         }
 
         // Configuración de Imágenes
