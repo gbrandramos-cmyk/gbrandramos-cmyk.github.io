@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Pin Me</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --text-primary: #1772ff;
+            --text-gray: #888888;
+            --text-light: #e0e0e0;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: #fff;
+        }
+
+        .lang-switch {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .lang-switch:hover {
+            background: var(--text-primary);
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 { color: var(--text-primary); margin-bottom: 40px; font-size: 32px; font-weight: 800; border-bottom: 2px solid var(--text-primary); padding-bottom: 10px; }
+        h2 { color: var(--text-primary); margin-top: 40px; font-size: 22px; font-weight: 700; }
+        p { color: rgba(255, 255, 255, 0.8); font-size: 16px; margin-bottom: 20px; }
+        ul { color: rgba(255, 255, 255, 0.7); }
+        li { margin-bottom: 10px; }
+        .footer { margin-top: 60px; font-size: 12px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="assets/images/logo.png" alt="Pin Me Logo" id="main-logo" onerror="this.style.display='none'">
+            </a>
+        </div>
+        <div class="header-nav">
+            <a href="index.html" id="nav-home">Inicio</a>
+            <a href="privacy.html" id="nav-privacy">Privacidad</a>
+            <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
+        </div>
+    </header>
+
+    <div class="container" id="privacy-content">
+        <!-- Will be dynamically filled by JS -->
+    </div>
+
+    <div class="footer" id="footer-text">
+        <!-- Will be dynamically filled by JS -->
+    </div>
+
+    <script>
+        const translations = {
+            es: {
+                title: "Política de Privacidad - Pin Me",
+                navHome: "Inicio",
+                navPrivacy: "Privacidad",
+                langBtn: "EN",
+                content: `
+                    <h1>Política de Privacidad</h1>
+                    <p>Última actualización: 15 de mayo de 2026</p>
+                    
+                    <p><strong>G brand Apps</strong> ("nosotros") opera la aplicación <strong>Pin Me</strong>. Esta página le informa de nuestras políticas con respecto a la recopilación, el uso y la divulgación de datos personales cuando utiliza nuestra aplicación.</p>
+
+                    <h2>1. Información que recopilamos</h2>
+                    <p><strong>Pin Me</strong> está diseñada para ser una herramienta premium, privada y libre de anuncios. Por ello:</p>
+                    <ul style="margin-left: 20px; list-style-type: disc; margin-bottom: 20px;">
+                        <li>No recopilamos datos de identificación personal (como nombre, correo electrónico o número de teléfono) ya que la app no requiere inicio de sesión.</li>
+                        <li><strong>Ubicación:</strong> La aplicación solicita acceso a su ubicación GPS precisa. Esto es estrictamente necesario para la funcionalidad central de la app: mostrar su posición en el mapa 3D y permitirle guardar "pines" o crear rutas. Estos datos de ubicación NO se envían a nuestros servidores ni se comparten con terceros.</li>
+                        <li>No utilizamos identificadores para publicidad ni rastreamos su actividad a través de otras aplicaciones.</li>
+                    </ul>
+
+                    <h2>2. Almacenamiento Local</h2>
+                    <p>Cualquier dato generado por el usuario, como:</p>
+                    <ul style="margin-left: 20px; list-style-type: disc; margin-bottom: 20px;">
+                        <li>Ubicaciones guardadas (Pines).</li>
+                        <li>Nombres de lugares y notas.</li>
+                        <li>Fotos adjuntas a las ubicaciones.</li>
+                        <li>Historial de rutas y favoritos.</li>
+                    </ul>
+                    <p>Se almacena exclusivamente de forma local en su propio dispositivo. Nosotros no tenemos acceso a esta información y no se guarda en ninguna base de datos externa.</p>
+
+                    <h2>3. Publicidad y Suscripciones</h2>
+                    <p>Pin Me es una aplicación de pago único. NO contiene anuncios publicitarios de terceros (como AdMob) ni compras ocultas o suscripciones.</p>
+
+                    <h2>4. Cambios a esta Política</h2>
+                    <p>Podemos actualizar nuestra Política de Privacidad de vez en cuando. Le recomendamos revisar esta página periódicamente para conocer cualquier cambio.</p>
+
+                    <h2>5. Contacto</h2>
+                    <p>Si tiene alguna pregunta sobre esta Política de Privacidad, puede contactarnos en: <strong>g.brandramos@gmail.com</strong></p>
+                `,
+                footer: "© 2026 G brand Apps • Pin Me"
+            },
+            en: {
+                title: "Privacy Policy - Pin Me",
+                navHome: "Home",
+                navPrivacy: "Privacy",
+                langBtn: "ES",
+                content: `
+                    <h1>Privacy Policy</h1>
+                    <p>Last updated: May 15, 2026</p>
+                    
+                    <p><strong>G brand Apps</strong> ("us", "we", or "our") operates the <strong>Pin Me</strong> application. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our app.</p>
+
+                    <h2>1. Information We Collect</h2>
+                    <p><strong>Pin Me</strong> is designed as a premium, private, and ad-free tool. Therefore:</p>
+                    <ul style="margin-left: 20px; list-style-type: disc; margin-bottom: 20px;">
+                        <li>We do not collect personally identifiable information (such as name, email address, or phone number) as the app does not require a login.</li>
+                        <li><strong>Location:</strong> The app requests access to your precise GPS location. This is strictly required for the core functionality of the app: displaying your position on the 3D map and allowing you to save "pins" or create routes. This location data is NOT sent to our servers and is NOT shared with third parties.</li>
+                        <li>We do not use advertising identifiers or track your activity across other applications.</li>
+                    </ul>
+
+                    <h2>2. Local Storage</h2>
+                    <p>Any data generated by the user, such as:</p>
+                    <ul style="margin-left: 20px; list-style-type: disc; margin-bottom: 20px;">
+                        <li>Saved locations (Pins).</li>
+                        <li>Place names and notes.</li>
+                        <li>Photos attached to locations.</li>
+                        <li>Route history and favorites.</li>
+                    </ul>
+                    <p>Is stored exclusively locally on your own device. We have no access to this information, and it is not stored in any external database.</p>
+
+                    <h2>3. Advertising and Subscriptions</h2>
+                    <p>Pin Me is a one-time purchase application. It does NOT contain third-party advertisements (such as AdMob), hidden purchases, or subscriptions.</p>
+
+                    <h2>4. Changes to This Policy</h2>
+                    <p>We may update our Privacy Policy from time to time. We advise you to review this page periodically for any changes.</p>
+
+                    <h2>5. Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, you can contact us at: <strong>g.brandramos@gmail.com</strong></p>
+                `,
+                footer: "© 2026 G brand Apps • Pin Me"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function initLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            currentLang = browserLang.startsWith('es') ? 'es' : 'en';
+            applyLanguage();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const t = translations[currentLang];
+            document.title = t.title;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
+            document.getElementById('lang-btn').innerText = t.langBtn;
+            document.getElementById('privacy-content').innerHTML = t.content;
+            document.getElementById('footer-text').innerHTML = t.footer;
+        }
+
+        window.onload = () => {
+            initLanguage();
+        };
+    </script>
+</body>
+</html>

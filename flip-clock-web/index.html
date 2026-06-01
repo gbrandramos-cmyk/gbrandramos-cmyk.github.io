@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Clock | Time Master</title>
+    <style>
+        :root {
+            --bg-dark: #2a2826; /* Gris con tonos cafés */
+            --text-primary: #e6c28c; /* Dorado/café claro */
+            --text-gray: #888888;
+            --text-light: #e0e0e0;
+            --accent-primary: #d4a373;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: #fff;
+        }
+
+        .lang-switch {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--text-primary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .app-downloads {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-shrink: 0;
+            flex-direction: column;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(23, 114, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .store-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .store-badge.disabled {
+            opacity: 0.4;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .store-badge.disabled:hover {
+            opacity: 0.6;
+            transform: scale(1.02);
+            cursor: pointer;
+        }
+
+        .store-badge {
+            height: 35px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-description {
+            flex-grow: 1;
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .app-description p {
+            margin-bottom: 15px;
+        }
+
+        /* CAROUSEL TABS */
+        .os-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .os-tab {
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .os-tab.active {
+            color: var(--text-primary);
+        }
+
+        /* CAROUSEL CONTAINER */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        @media (max-width: 768px) {
+             .carousel-wrapper {
+                 aspect-ratio: 4 / 3;
+             }
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* DOTS */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--text-primary);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Flip Clock Logo" id="main-logo">
+            </div>
+            <div class="header-nav">
+                <a href="index.html" id="nav-home">Inicio</a>
+                <a href="privacy.html" id="nav-privacy">Privacidad</a>
+                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <main>
+            <section class="hero-section">
+                <div class="app-downloads">
+                    <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
+                    <div class="store-badges">
+                        <a href="https://apps.apple.com/app/id6775342639" target="_blank">
+                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-description" id="app-desc">
+                    <!-- Textos dinámicos aquí -->
+                </div>
+            </section>
+
+            <!-- CAROUSEL -->
+            <section class="gallery-section">
+
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack"></div>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots"></div>
+            </section>
+        </main>
+
+        <footer id="footer-text">
+            © 2026 G BRAND APPS • FLIP CLOCK
+        </footer>
+    </div>
+
+    <script>
+        const translations = {
+            es: {
+                title: "Flip Clock | Time Master",
+                navHome: "Inicio",
+                navPrivacy: "Privacidad",
+                langBtn: "EN",
+                desc: `
+                    <p><strong>Flip Clock: Time Master</strong> es la aplicación definitiva para darle vida a tu dispositivo con un toque estético y retro. Ideal para acompañar tus sesiones de estudio, trabajo o simplemente como decoración para tu escritorio o mesa de noche.</p>
+                    <p><strong>Características principales:</strong></p>
+                    <ul style="margin-left: 20px; list-style-type: disc;">
+                        <li><strong>Animaciones Hiperrealistas:</strong> Disfruta de la suave animación mecánica de las tarjetas cayendo, simulando a la perfección un reloj retro clásico.</li>
+                        <li><strong>Efectos de Sonido Auténticos:</strong> Relájate con los sonidos del "tic-tac" y el volteo de tarjetas mecánicas, ideales para mantener el enfoque.</li>
+                        <li><strong>Temas Personalizables:</strong> Explora diferentes fondos estéticos y diseños de reloj para combinar perfectamente con tu setup.</li>
+                        <li><strong>Modo Digital y Analógico:</strong> Accede a exclusivos diseños premium para variar tu experiencia según tu estado de ánimo.</li>
+                        <li><strong>Temporizador y Alarmas:</strong> Úsalo como reloj despertador o configura el Sleep Timer para quedarte dormido tranquilamente.</li>
+                        <li><strong>Opciones de Visualización:</strong> Muestra u oculta los segundos, la fecha y tu ubicación con un solo toque.</li>
+                        <li><strong>Modo Horizontal y Vertical:</strong> Adáptalo perfectamente a cualquier orientación para usarlo como reloj de mesa (StandBy).</li>
+                    </ul>
+                `,
+                footer: `<a href="https://gbrandramos-cmyk.github.io/" style="color: inherit; text-decoration: none;">© 2026 G BRAND APPS • FLIP CLOCK</a>`
+            },
+            en: {
+                title: "Flip Clock | Time Master",
+                navHome: "Home",
+                navPrivacy: "Privacy",
+                langBtn: "ES",
+                desc: `
+                    <p><strong>Flip Clock: Time Master</strong> is the ultimate app to bring your device to life with an aesthetic retro touch. Perfect for your study sessions, work focus, or simply as a beautiful desk or nightstand decoration.</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul style="margin-left: 20px; list-style-type: disc;">
+                        <li><strong>Hyper-Realistic Animations:</strong> Enjoy the smooth mechanical animation of falling cards, perfectly simulating a classic retro clock.</li>
+                        <li><strong>Authentic Sound Effects:</strong> Relax with the soothing "tick-tock" and mechanical flip sounds, ideal for keeping your focus.</li>
+                        <li><strong>Customizable Themes:</strong> Explore different aesthetic backgrounds and clock designs to perfectly match your setup.</li>
+                        <li><strong>Digital and Analog Modes:</strong> Unlock exclusive premium designs to match your mood.</li>
+                        <li><strong>Sleep Timer & Alarms:</strong> Use it as your morning alarm or set the Sleep Timer to fall asleep peacefully.</li>
+                        <li><strong>Display Options:</strong> Show or hide seconds, the date, and your location with a single tap.</li>
+                        <li><strong>Portrait & Landscape Modes:</strong> Adapts flawlessly to any orientation, perfect for use as a desk clock (StandBy mode).</li>
+                    </ul>
+                `,
+                footer: `<a href="https://gbrandramos-cmyk.github.io/" style="color: inherit; text-decoration: none;">© 2026 G BRAND APPS • FLIP CLOCK</a>`
+            }
+        };
+
+        let currentLang = 'es';
+
+        function initLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            currentLang = browserLang.startsWith('es') ? 'es' : 'en';
+            applyLanguage();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const t = translations[currentLang];
+            document.title = t.title;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
+            document.getElementById('lang-btn').innerText = t.langBtn;
+            document.getElementById('app-desc').innerHTML = t.desc;
+            document.getElementById('footer-text').innerHTML = t.footer;
+            
+            // Re-inicializar slider para asegurar consistencia
+            initSlider();
+        }
+
+        // Configuración de Imágenes
+        let currentOS = 'ios';
+        let currentIndex = 0;
+        let autoPlayInterval;
+
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+        
+        function getSlideCount() {
+            return 8; // Asegúrate de ajustar este número a la cantidad de imágenes que agregues
+        }
+
+        function initSlider() {
+            renderSlides();
+            renderDots();
+            goToSlide(0);
+            startAutoPlay();
+        }
+
+        function renderSlides() {
+            track.innerHTML = '';
+            const total = getSlideCount();
+            for(let i = 1; i <= total; i++) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} ${i}">`;
+                track.appendChild(slide);
+            }
+        }
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            const total = getSlideCount();
+            for(let i = 0; i < total; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.onclick = () => { goToSlide(i); startAutoPlay(); };
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        }
+
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            const total = getSlideCount();
+            autoPlayInterval = setInterval(() => {
+                goToSlide((currentIndex + 1) % total);
+            }, 3000);
+        }
+
+        window.onload = () => {
+            initLanguage();
+        };
+    </script>
+</body>
+</html>
