@@ -98,7 +98,7 @@
     <!-- HEADER -->
     <header>
             <a href="index.html">
-                <img src="assets/images/logo.png" alt="Flip Clock Logo" id="main-logo" onerror="this.style.display='none'">
+                <img src="assets/images/logo-es.png" alt="Flip Clock Logo" id="main-logo" onerror="this.style.display='none'">
             </a>
         </div>
         <div class="header-nav">
@@ -217,6 +217,7 @@
             document.getElementById('lang-btn').innerText = t.langBtn;
             document.getElementById('privacy-content').innerHTML = t.content;
             document.getElementById('footer-text').innerHTML = t.footer;
+            document.getElementById('main-logo').src = currentLang === 'es' ? 'assets/images/logo-es.png' : 'assets/images/logo-en.png';
         }
 
         window.onload = () => {

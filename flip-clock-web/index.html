@@ -250,7 +250,7 @@
         <!-- HEADER -->
         <header>
             <div class="logo-container">
-                <img src="assets/images/logo.png" alt="Flip Clock Logo" id="main-logo">
+                <img src="assets/images/logo-es.png" alt="Flip Clock Logo" id="main-logo">
             </div>
             <div class="header-nav">
                 <a href="index.html" id="nav-home">Inicio</a>
@@ -357,6 +357,7 @@
             document.getElementById('lang-btn').innerText = t.langBtn;
             document.getElementById('app-desc').innerHTML = t.desc;
             document.getElementById('footer-text').innerHTML = t.footer;
+            document.getElementById('main-logo').src = currentLang === 'es' ? 'assets/images/logo-es.png' : 'assets/images/logo-en.png';
             
             // Re-inicializar slider para asegurar consistencia
             initSlider();
