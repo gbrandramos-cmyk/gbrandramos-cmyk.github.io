@@ -260,8 +260,8 @@
                 <div class="app-downloads">
                     <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
                     <div class="store-badges">
-                        <a href="#" onclick="handleIOSClick(event)">
-                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge disabled" onerror="this.style.display='none'">
+                        <a href="https://apps.apple.com/mx/app/flip-clock-time-master/id6775342639" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
                         </a>
                     </div>
                 </div>
@@ -358,14 +358,6 @@
             initSlider();
         }
 
-        function handleIOSClick(e) {
-            e.preventDefault();
-            const msg = currentLang === 'es' 
-                ? "Próximamente disponible en Apple App Store para iOS." 
-                : "Coming soon to the Apple App Store for iOS.";
-            alert(msg);
-        }
-
         // Configuración de Imágenes
         let currentOS = 'ios';
         let currentIndex = 0;
@@ -375,7 +367,7 @@
         const dotsContainer = document.getElementById('carouselDots');
         
         function getSlideCount() {
-            return 5; // Updated to match the 5 images in assets/images/ios/
+            return 6; // Updated to match the 6 images in assets/images/ios/
         }
 
         function initSlider() {
